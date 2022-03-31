@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Edit - Taskmate</title>
+{% endblock title %}
+
+{% block content %}
+<br>
+{% if task_obj.manager == request.user %}
+    <form method='POST' class='row'>      
+        {% csrf_token %}
+        <div class="col-lg-2"></div>
+        <div class="col-lg-6">
+        <input type="text" class="form-control" name="task" placeholder="{{task_obj.task}}" value="{{task_obj.task}}">
+        </div>
+        <input type='hidden' name="done" value="{{task_obj.done}}">
+        <div class="col-lg-2">
+        <button type="submit" class="btn btn-primary">Update Task</button>
+        </div>
+    </form>
+{% else %}
+    <h4 class="ms-5">Access Restricted, You are not authenticated for this operation</h4>
+{% endif %}
+{% endblock content %}
